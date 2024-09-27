@@ -137,7 +137,21 @@ int leerLinea( char *linea, int tamanyLinea )
 /****************************************************************/
 void visualizar( void )
 {  
-   
+	void analizador_ini(void);
+	int num = num_ordenes();
+	printf("Número de ordenes: %d\n", num);
+	
+	char **ordenes = get_ordenes();
+	int *numero_argumentos = num_argumentos();
+	char ***get_argumentos = get_argumentos();	
+
+	for(int i = 0; i < num_ordenes; i++){
+  		printf("ORDEN %d\n -> %s", i, ordenes[i]);
+  		printf("Número de argumentos -> %d\n", numero_argumentos[i]);
+		for(int j = 0; j < numero_argumentos[i]; j++){
+			printf("Argumento %d -> %s\n", i, get_argumentos[i][j];
+		}
+	} 
 } // Fin de "visualizar"
 
 
