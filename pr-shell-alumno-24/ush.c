@@ -143,15 +143,46 @@ void visualizar( void )
 	
 	char **ordenes = get_ordenes();
 	int *numero_argumentos = num_argumentos();
-	char ***get_argumentos = get_argumentos();	
+	char ***argumentos = get_argumentos();	
+	
 
 	for(int i = 0; i < num_ordenes; i++){
   		printf("ORDEN %d\n -> %s", i, ordenes[i]);
   		printf("Número de argumentos -> %d\n", numero_argumentos[i]);
 		for(int j = 0; j < numero_argumentos[i]; j++){
-			printf("Argumento %d -> %s\n", i, get_argumentos[i][j];
+			printf("Argumento %d -> %s\n", i, argumentos[i][j]);
 		}
-	} 
+	}
+	
+	char *entrada = fich_entrada();
+	char *salida = fich_salida();
+
+	if(entrada != NULL){
+		printf("El fichero de entrada es %s\n", entrada);
+	}
+	
+	if(salida != NULL){	
+		printf("El fichero de salida es %s\n", salida);
+		if(es_append() > 0){
+			printf("La salida debe ser añadida al fichero (APPEND)");
+		}
+		else{
+			printf("La salida NO debe ser añadida al fichero (TRUNK)");
+		}
+	}
+	
+	int background = es_background();
+
+	if(background > 0){
+		printf("La orden se ha ejecutado en background");
+	}
+	else{
+		printf("La orden se ha ejecutado en foreground");
+	}
+
+	
+		
+
 } // Fin de "visualizar"
 
 
