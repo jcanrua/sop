@@ -61,7 +61,7 @@ int main(int argc, char * argv[])
 	     m_ordenes=get_ordenes();
 	     m_argumentos=get_argumentos();
 	     if(m_n>0){
-         	if (pipeline(m_n,fich_entrada(),fich_salida(),es_append(),es_background())==OK){
+         	if (pipeline(m_n,fich_entrada(),fich_salida(),es_append(),es_background())==1){
 				error = ejecutar(m_n,m_num_arg,m_ordenes,m_argumentos,es_background());
 			}
         }
