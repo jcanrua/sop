@@ -54,7 +54,7 @@ int main(int argc, char * argv[])
 		      fprintf(stdout,"linea muy larga\n");
 	      }
      }while(res<=0);
-
+	
      if (analizar(line)==OK){
 		 m_n=num_ordenes();
 	     m_num_arg=num_argumentos();
@@ -103,7 +103,7 @@ int main(int argc, char * argv[])
 //char * getline(void)
 int leerLinea( char *linea, int tamanyLinea )
 {
-	printf("%s - %s-> ", getcwd(NULL, 0), PROMPT);
+	printf(ORANGE"%s" RESET " - " BOLD ORANGE "%s" RESET " -> ", getcwd(NULL, 0), PROMPT);
 	
 	int total = 0;
 	char i;
@@ -115,6 +115,7 @@ int leerLinea( char *linea, int tamanyLinea )
 			return -2;
 		}
 		else if(total>tamanyLinea){
+			printf(RED "\nError: se ha excedido el tamaño máximo de la linea\n" RESET);
 			return -1;
 		}
 	} while(i != '\n');
@@ -142,23 +143,21 @@ void visualizar( void )
 	void analizador_ini(void);
 	int numero_ordenes = num_ordenes();
 	printf("\n");
-	printf("Número de ordenes: %d\n", numero_ordenes);
-	printf("\n");
+	printf(BOLD GREEN "Número de ordenes:" RESET " " BOLD ORANGE "%d\n" RESET, numero_ordenes);
+	
 	char **ordenes = get_ordenes();
 	int *numero_argumentos = num_argumentos();
 	char ***argumentos = get_argumentos();	
 	
-	
-	
 
 	for(int i = 0; i < numero_ordenes; i++){
-  		printf("        --- ORDEN %d ---\n", i);
-  		printf("    Número de argumentos -> %d\n", numero_argumentos[i]);
+  		printf(BOLD GREEN "\n        --- ORDEN "ORANGE" %d "RESET"---\n", i);
+  		printf(PURPLE"    Número de argumentos ->"ORANGE" %d\n" RESET, numero_argumentos[i]);
 		for(int j = 0; j < numero_argumentos[i]; j++){
 			if(argumentos[i][j] == NULL){
 				break;
 			}
-			printf("        Argumento %d -> %s\n", j, argumentos[i][j]);
+			printf(CYAN"        Argumento %d -> " ORANGE "%s\n" RESET, j, argumentos[i][j]);
 		}
 	}
 	
@@ -166,24 +165,24 @@ void visualizar( void )
 	char *salida = fich_salida();
 
 	if(entrada[0] != '\0'){
-		printf("    El fichero de entrada es %s\n", entrada);
+		printf( PURPLE"    El fichero de entrada es: " ORANGE" %s\n" RESET, entrada);
 	}
 	
 	if(salida[0] != '\0'){	
-		printf("    El fichero de salida es %s\n", salida);
+		printf(PURPLE"    El fichero de salida es: "ORANGE" %s\n" RESET, salida);
 		if(es_append() != 0){
-			printf("        La salida debe ser añadida al fichero (APPEND)\n");
+			printf(CYAN"        La salida debe ser añadida al fichero (APPEND)\n" RESET);
 		}
 		else{
-			printf("        La salida NO debe ser añadida al fichero (TRUNK)\n");
+			printf(CYAN"        La salida NO debe ser añadida al fichero (TRUNK)\n"RESET);
 		}
 	}
     printf("\n");	
 	if(es_background() != 0){
-		printf("    La orden se ha ejecutado en background\n");
+		printf(BLUE"    La orden se ha ejecutado en BACKGROUND\n" RESET);
 	}
 	else{
-		printf("    La orden se ha ejecutado en foreground\n");
+		printf(BLUE"    La orden se ha ejecutado en FOREGROUND\n"RESET);
 	}
 	
 	printf("\n");

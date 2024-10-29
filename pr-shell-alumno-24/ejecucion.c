@@ -21,7 +21,7 @@ int ejecutar (int nordenes , int *nargs , char **ordenes , char ***args , int bg
 		pid_t val = fork();
 		
 		if(val == -1){
-			printf("ERROR al crear un hijo\n");
+			printf(RED"ERROR al crear un hijo\n"RESET);
 			break;
 		}
 
@@ -30,13 +30,13 @@ int ejecutar (int nordenes , int *nargs , char **ordenes , char ***args , int bg
 			redirigir_salida(i);
 			cerrar_fd();
 			if (execvp(ordenes[i],args[i])==-1){
-				printf("Error en exec\n");
-				printf("Error: Comando no encontrado: %s\n", ordenes[i]);
+				printf(RED"Error en exec\n"RESET);
+				printf(RED"Error: Comando no encontrado: %s\n"RESET, ordenes[i]);
 				return 0;
 			}	
 		}
 	}
-	cerrar_fd();
+	cerrar_fd(); // Cerrar en el padre
 	while(wait(&status) != -1);
 	return 1;
 } // Fin de la funcion "ejecutar"
